@@ -35,5 +35,29 @@ namespace PassIn.Api.Controllers;
 
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(ResponseEventJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public IActionResult GetById([FromRoute] Guid id)
+        {
+            try
+            {
+                var useCase = new GetEventByIdUseCase();
+
+                var response = useCase.Execute(id);
+
+                return Ok(response);
+            }
+            catch (PassInException ex)
+            {
+                return NotFound(new ResponseErrorJson(ex.Message));
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorJson("Unknown error"));
+            }
+
+        }
     }
 

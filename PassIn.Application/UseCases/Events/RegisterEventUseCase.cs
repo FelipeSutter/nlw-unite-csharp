@@ -1,4 +1,5 @@
 ﻿using PassIn.Communication.Requests;
+using PassIn.Communication.Responses;
 using PassIn.Exceptions;
 using PassIn.Infrastructure;
 
@@ -7,7 +8,7 @@ namespace PassIn.Application.UseCases.Events
     public class RegisterEventUseCase
     {
 
-        public void Execute(RequestEventJson request)
+        public ResponseRegisteredEventJson Execute(RequestEventJson request)
         {
             Validate(request);
 
@@ -27,6 +28,11 @@ namespace PassIn.Application.UseCases.Events
             // Erro que está dando na hora de adicionar
             dbContext.Events.Add(entity);
             dbContext.SaveChanges();
+
+            return new ResponseRegisteredEventJson {
+                Id = entity.Id,
+            };
+
         }
 
         private void Validate(RequestEventJson request)

@@ -21,17 +21,17 @@ namespace PassIn.Api.Controllers;
             {
                 var useCase = new RegisterEventUseCase();
 
-                useCase.Execute(request);
+                var response = useCase.Execute(request);
 
-                return Created();
+                return Created(string.Empty, response);
             } 
             catch (PassInException ex) {
                 return BadRequest(new ResponseErrorJson(ex.Message));
             }
-            //catch
-            //{
-                //return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorJson("Unknown error"));
-            //}
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorJson("Unknown error"));
+            }
 
         }
 

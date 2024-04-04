@@ -10,7 +10,7 @@ namespace PassIn.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source= C:\\Codes\\nlw-unite-csharp\\PassInDb.db");
+            optionsBuilder.UseSqlite("Data Source= C:\\devSerratec\\API_Restful\\workspace\\nlw-unite-csharp\\PassInDb.db");
         }
     }
 }
